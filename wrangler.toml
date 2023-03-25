@@ -4,7 +4,7 @@ node_compat = true
 compatibility_date = "2023-03-25"
 
 [triggers]
-crons = [ "2 8 * * 0" ]
+crons = [ "2 8 * * SUN" ]
 
 # Secrets
 # DISCORD_WEBHOOK_URL
