@@ -1,0 +1,11 @@
+name = "hologra-bot"
+main = "src/index.ts"
+node_compat = true
+compatibility_date = "2023-03-25"
+
+[triggers]
+crons = [ "2 8 * * 0" ]
+
+# Secrets
+# DISCORD_WEBHOOK_URL
+# HOLODEX_API_KEY
