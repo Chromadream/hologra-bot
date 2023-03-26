@@ -20,7 +20,7 @@ declare global {
 
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-	// MY_KV_NAMESPACE: KVNamespace;
+	VALUES: KVNamespace;
 	//
 	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
 	// MY_DURABLE_OBJECT: DurableObjectNamespace;
@@ -32,18 +32,21 @@ export interface Env {
 	HOLODEX_API_KEY: string;
 }
 
+const EPISODEKEY = "LASTEPISODE";
+
 export default {
 	async scheduled(
 		controller: ScheduledController,
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<void> {
-		const youtubeId = await getHologra(env.HOLODEX_API_KEY);
-		if (youtubeId === ""){
+		const [youtubeId, lastVideo] = await Promise.all([getHologra(env.HOLODEX_API_KEY), env.VALUES.get(EPISODEKEY)]);
+		if (youtubeId === "" || youtubeId === lastVideo){
 			return;
 		}
 		const client = new Webhook(env.DISCORD_WEBHOOK_URL);
 		client.setUsername("holo no graffiti");
 		client.send(`New episode: https://www.youtube.com/watch?v=${youtubeId}`);
+		await env.VALUES.put(EPISODEKEY, youtubeId);
 	},
 };
