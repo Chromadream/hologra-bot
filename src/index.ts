@@ -10,7 +10,7 @@
  * Learn more at https://developers.cloudflare.com/workers/runtime-apis/scheduled-event/
  */
 
-import {Webhook} from 'discord-webhook-node-data';
+import {Webhook} from 'minimal-discord-webhook-node';
 import { getHologra } from "./holodex";
 
 declare global {

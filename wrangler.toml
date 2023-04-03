@@ -1,6 +1,5 @@
 name = "hologra-bot"
 main = "src/index.ts"
-node_compat = true
 compatibility_date = "2023-03-25"
 kv_namespaces = [{ binding = "VALUES", id = "14c0228e5ff94a4482ac98854fa6d1d7", preview_id = "3f96d03d061240c0884cdf7aa979a4f2" }]
 
